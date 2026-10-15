@@ -89,3 +89,8 @@ walsgit-recycle-bin:
       open_post: "Ouvrir le post"
 
   forum:
+    permanent_delete:
+      button: 'Supprimer définitivement'
+      post_confirmation: 'Cette réponse sera définitivement supprimée et ne pourra pas être restaurée. Continuer ?'
+      discussion_confirmation: 'Cette discussion sera définitivement supprimée et ne pourra pas être restaurée. Continuer ?'
+      error: 'Le contenu n’a pas pu être supprimé définitivement.'

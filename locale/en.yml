@@ -89,3 +89,8 @@ walsgit-recycle-bin:
       open_post: "Open post"
 
   forum:
+    permanent_delete:
+      button: 'Permanently delete'
+      post_confirmation: 'This reply will be permanently deleted and cannot be restored. Continue?'
+      discussion_confirmation: 'This discussion will be permanently deleted and cannot be restored. Continue?'
+      error: 'The content could not be permanently deleted.'
