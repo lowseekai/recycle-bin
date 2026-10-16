@@ -20,15 +20,24 @@ function confirmPermanentDelete(kind: 'post' | 'discussion', id: string) {
 }
 
 app.initializers.add('walsgit/recycle-bin', () => {
-  app
-    .request<{ canDeleteOwnForever: boolean }>({
-      method: 'GET',
-      url: '/api/recycle-bin/permissions',
-    })
-    .then((result) => {
-      canDeleteOwnForever = result.canDeleteOwnForever;
-      m.redraw();
-    });
+  // Flarum assigns app.session after initializers run. Defer this request so
+  // Flarum's request middleware can read the CSRF token safely.
+  window.setTimeout(() => {
+    if (!app.session) return;
+
+    app
+      .request<{ canDeleteOwnForever: boolean }>({
+        method: 'GET',
+        url: '/api/recycle-bin/permissions',
+      })
+      .then((result) => {
+        canDeleteOwnForever = result.canDeleteOwnForever;
+        m.redraw();
+      })
+      .catch(() => {
+        canDeleteOwnForever = false;
+      });
+  }, 0);
 
   extend(PostControls, 'userControls', (items, post) => {
     const user = app.session.user;
