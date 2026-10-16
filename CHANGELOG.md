@@ -1,6 +1,11 @@
 
 # Changelog
 
+## [2.0.13] - 2026-10-16
+### Fixed
+- Only show the author's permanent-delete action for content that is already soft-deleted.
+- Rebuilt the forum bundle so the published asset matches the source.
+
 ## [2.0.7] - 2026-10-09
 ### Fixed
 - Redundant admin page registrations

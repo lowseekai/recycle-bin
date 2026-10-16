@@ -37,7 +37,7 @@ app.initializers.add('walsgit/recycle-bin', () => {
     const user = app.session.user;
     const author = post.user();
 
-    if (!canDeleteOwnForever || !user || !author || author.id() !== user.id()) return;
+    if (!canDeleteOwnForever || !post.hiddenAt() || !user || !author || author.id() !== user.id()) return;
 
     items.add('recycle-bin-permanent-delete', Button.component({
       icon: 'fas fa-trash-alt',
@@ -50,7 +50,7 @@ app.initializers.add('walsgit/recycle-bin', () => {
     const author = discussion.user();
     const participantCount = Number(discussion.attribute('participantCount') || 0);
 
-    if (!canDeleteOwnForever || !user || !author || author.id() !== user.id() || participantCount > 1) return;
+    if (!canDeleteOwnForever || !discussion.hiddenAt() || !user || !author || author.id() !== user.id() || participantCount > 1) return;
 
     items.add('recycle-bin-permanent-delete', Button.component({
       icon: 'fas fa-trash-alt',
