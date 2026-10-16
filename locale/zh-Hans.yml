@@ -7,4 +7,4 @@ walsgit-recycle-bin:
       error: '内容无法永久删除，请稍后重试。'
   admin:
     permissions:
-      delete_own_forever: '永久删除自己的内容'
+      deleteOwnForever: '永久删除自己的内容'

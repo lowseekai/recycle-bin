@@ -1,7 +1,7 @@
 walsgit-recycle-bin:
   admin:
     permissions:
-      delete_own_forever: 'Permanently delete own content'
+      deleteOwnForever: 'Permanently delete own content'
     discussions_bin: 'Discussions Bin'
     posts_bin: 'Posts Bin'
     search_placeholder: "Search for a discussion"
