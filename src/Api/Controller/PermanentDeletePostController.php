@@ -23,10 +23,11 @@ class PermanentDeletePostController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $post = Post::withoutGlobalScopes()
-            ->where('posts.id', $id)
-            ->whereNotNull('posts.hidden_at')
-            ->first();
+        if ($id === 0 && preg_match('~/posts/(\\d+)/permanent$~', $request->getUri()->getPath(), $matches)) {
+            $id = (int) $matches[1];
+        }
+        $row = $this->db->table('posts')->where('id', $id)->whereNotNull('hidden_at')->first();
+        $post = $row ? (new Post)->newFromBuilder((array) $row) : null;
 
         if (! $post) {
             return new JsonResponse(['error' => 'not_found'], 404);

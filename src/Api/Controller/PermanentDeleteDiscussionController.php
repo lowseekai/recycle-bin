@@ -23,10 +23,11 @@ class PermanentDeleteDiscussionController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $discussion = Discussion::withoutGlobalScopes()
-            ->where('discussions.id', $id)
-            ->whereNotNull('discussions.hidden_at')
-            ->first();
+        if ($id === 0 && preg_match('~/discussions/(\\d+)/permanent$~', $request->getUri()->getPath(), $matches)) {
+            $id = (int) $matches[1];
+        }
+        $row = $this->db->table('discussions')->where('id', $id)->whereNotNull('hidden_at')->first();
+        $discussion = $row ? (new Discussion)->newFromBuilder((array) $row) : null;
 
         if (! $discussion) {
             return new JsonResponse(['error' => 'not_found'], 404);

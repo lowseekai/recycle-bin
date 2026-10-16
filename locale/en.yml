@@ -1,5 +1,10 @@
 walsgit-recycle-bin:
   admin:
+    auto_cleanup:
+      title: 'Automatic cleanup'
+      help: 'Automatically permanently delete users own soft-deleted content after the retention period. Administrator and moderator deletions are never selected.'
+      enabled: 'Enable automatic cleanup'
+      days: 'Retention period (days)'
     permissions:
       deleteOwnForever: 'Permanently delete own content'
     discussions_bin: 'Discussions Bin'

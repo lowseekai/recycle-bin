@@ -21,6 +21,7 @@ use Walsgit\RecycleBin\Api\Controller\PermanentDeleteDiscussionController;
 use Walsgit\RecycleBin\Api\Controller\PermissionController;
 use Walsgit\RecycleBin\Filter\HiddenPostFilter;
 use Walsgit\RecycleBin\Filter\ContentPostFilter;
+use Walsgit\RecycleBin\Console\CleanupCommand;
 
 return [
     (new Extend\Frontend('admin'))
@@ -29,6 +30,14 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js'),
     new Extend\Locales(__DIR__.'/locale'),
+    (new Extend\Console())
+        ->command(CleanupCommand::class)
+        ->schedule(CleanupCommand::class, function ($event) {
+            $event->dailyAt('03:30')->withoutOverlapping();
+        }),
+    (new Extend\Settings())
+        ->default('walsgit-recycle-bin.auto_cleanup_enabled', false)
+        ->default('walsgit-recycle-bin.auto_cleanup_days', 90),
     (new Extend\Routes('api'))
         ->get('/recycle-bin/permissions', 'recycle-bin.permissions', PermissionController::class)
         ->get('/recycle-bin/discussion-statistics', 'recycle-bin.discussion-statistics', DiscussionStatisticsController::class)

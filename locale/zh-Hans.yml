@@ -6,5 +6,10 @@ walsgit-recycle-bin:
       discussion_confirmation: '此讨论将被永久删除，且无法恢复。确定继续吗？'
       error: '内容无法永久删除，请稍后重试。'
   admin:
+    auto_cleanup:
+      title: '自动清理'
+      help: '超过保留期限后自动永久删除用户自己软删除的内容。管理员和版主删除的内容不会被自动清理。'
+      enabled: '启用自动清理'
+      days: '保留期限（天）'
     permissions:
       deleteOwnForever: '永久删除自己的内容'
