@@ -28,10 +28,6 @@ class PermanentDeleteDiscussionController implements RequestHandlerInterface
             return new JsonResponse(['error' => 'permission_denied'], 403);
         }
 
-        if (! $discussion->hidden_at) {
-            return new JsonResponse(['error' => 'discussion_not_deleted'], 422);
-        }
-
         if (! $actor->isAdmin()) {
             if ((int) $discussion->user_id !== (int) $actor->id) {
                 return new JsonResponse(['error' => 'own_content_only'], 403);

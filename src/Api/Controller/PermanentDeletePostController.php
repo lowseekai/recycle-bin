@@ -28,10 +28,6 @@ class PermanentDeletePostController implements RequestHandlerInterface
             return new JsonResponse(['error' => 'permission_denied'], 403);
         }
 
-        if (! $post->hidden_at) {
-            return new JsonResponse(['error' => 'post_not_deleted'], 422);
-        }
-
         if (! $actor->isAdmin() && ((int) $post->user_id !== (int) $actor->id || (int) $post->discussion->first_post_id === (int) $post->id)) {
             return new JsonResponse(['error' => 'own_content_only'], 403);
         }
