@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.15
+
+- Use Flarum's native discussion deletion lifecycle for permanent deletion.
+
 ## 2.0.14
 
 - Fix permanent deletion of soft-deleted discussions and posts for authorized users.

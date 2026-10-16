@@ -50,10 +50,7 @@ class PermanentDeleteDiscussionController implements RequestHandlerInterface
             }
         }
 
-        $this->db->transaction(function () use ($discussion) {
-            $discussion->posts()->get()->each(fn ($post) => $post->delete());
-            $discussion->delete();
-        });
+        $this->db->transaction(fn () => $discussion->delete());
 
         return new JsonResponse(['success' => true, 'id' => $id]);
     }
