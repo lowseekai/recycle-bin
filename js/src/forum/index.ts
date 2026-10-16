@@ -23,6 +23,8 @@ function confirmPermanentDelete(kind: 'post' | 'discussion', id: string) {
 }
 
 app.initializers.add('walsgit/recycle-bin', () => {
+  if (!app.forum) return;
+
   app
     .request<{ canDeleteOwnForever: boolean }>({
       method: 'GET',
