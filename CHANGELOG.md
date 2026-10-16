@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.14
+
+- Fix permanent deletion of soft-deleted discussions and posts for authorized users.
+
 ## [2.0.13] - 2026-10-16
 ### Fixed
 - Only show the author's permanent-delete action for content that is already soft-deleted.

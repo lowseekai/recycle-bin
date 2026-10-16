@@ -22,7 +22,14 @@ class PermanentDeletePostController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $post = $this->posts->findOrFail($id, $actor);
+        $post = $this->posts->query()
+            ->where('posts.id', $id)
+            ->whereNotNull('posts.hidden_at')
+            ->first();
+
+        if (! $post) {
+            return new JsonResponse(['error' => 'not_found'], 404);
+        }
 
         if (! $actor->isAdmin() && ! $actor->hasPermission('recycleBin.deleteOwnForever')) {
             return new JsonResponse(['error' => 'permission_denied'], 403);

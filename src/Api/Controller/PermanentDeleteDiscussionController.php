@@ -22,7 +22,14 @@ class PermanentDeleteDiscussionController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $discussion = $this->discussions->findOrFail($id, $actor);
+        $discussion = $this->discussions->query()
+            ->where('discussions.id', $id)
+            ->whereNotNull('discussions.hidden_at')
+            ->first();
+
+        if (! $discussion) {
+            return new JsonResponse(['error' => 'not_found'], 404);
+        }
 
         if (! $actor->isAdmin() && ! $actor->hasPermission('recycleBin.deleteOwnForever')) {
             return new JsonResponse(['error' => 'permission_denied'], 403);
