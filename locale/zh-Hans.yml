@@ -5,3 +5,6 @@ walsgit-recycle-bin:
       post_confirmation: '此回复将被永久删除，且无法恢复。确定继续吗？'
       discussion_confirmation: '此讨论将被永久删除，且无法恢复。确定继续吗？'
       error: '内容无法永久删除，请稍后重试。'
+  admin:
+    permissions:
+      delete_own_forever: '永久删除自己的内容'
