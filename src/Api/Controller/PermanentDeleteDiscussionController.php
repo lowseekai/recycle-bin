@@ -3,6 +3,7 @@
 namespace Walsgit\RecycleBin\Api\Controller;
 
 use Flarum\Discussion\DiscussionRepository;
+use Flarum\Discussion\Discussion;
 use Flarum\Http\RequestUtil;
 use Illuminate\Database\ConnectionInterface;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -22,7 +23,7 @@ class PermanentDeleteDiscussionController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $discussion = $this->discussions->query()
+        $discussion = Discussion::withoutGlobalScopes()
             ->where('discussions.id', $id)
             ->whereNotNull('discussions.hidden_at')
             ->first();

@@ -3,6 +3,7 @@
 namespace Walsgit\RecycleBin\Api\Controller;
 
 use Flarum\Http\RequestUtil;
+use Flarum\Post\Post;
 use Flarum\Post\PostRepository;
 use Illuminate\Database\ConnectionInterface;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -22,7 +23,7 @@ class PermanentDeletePostController implements RequestHandlerInterface
     {
         $actor = RequestUtil::getActor($request);
         $id = (int) ($request->getAttribute('id') ?? 0);
-        $post = $this->posts->query()
+        $post = Post::withoutGlobalScopes()
             ->where('posts.id', $id)
             ->whereNotNull('posts.hidden_at')
             ->first();

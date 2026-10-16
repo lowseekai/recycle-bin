@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.17
+
+- Query soft-deleted content without Flarum visibility global scopes before permanent deletion.
+
 ## 2.0.16
 
 - Avoid showing a duplicate error alert after a failed permanent-delete request.
