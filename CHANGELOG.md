@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.16
+
+- Avoid showing a duplicate error alert after a failed permanent-delete request.
+
 ## 2.0.15
 
 - Use Flarum's native discussion deletion lifecycle for permanent deletion.

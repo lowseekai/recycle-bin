@@ -16,10 +16,7 @@ function confirmPermanentDelete(kind: 'post' | 'discussion', id: string) {
       method: 'DELETE',
       url: app.forum.attribute('apiUrl') + '/recycle-bin/' + kind + 's/' + id + '/permanent',
     })
-    .then(() => window.location.reload())
-    .catch(() => {
-      app.alerts.show({ type: 'error' }, app.translator.trans('walsgit-recycle-bin.forum.permanent_delete.error'));
-    });
+    .then(() => window.location.reload());
 }
 
 app.initializers.add('walsgit/recycle-bin', () => {
