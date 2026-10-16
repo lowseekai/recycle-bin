@@ -1,5 +1,7 @@
 walsgit-recycle-bin:
   admin:
+    permissions:
+      delete_own_forever: 'Permanently delete own content'
     discussions_bin: 'Discussions Bin'
     posts_bin: 'Posts Bin'
     search_placeholder: "Search for a discussion"
@@ -94,6 +96,3 @@ walsgit-recycle-bin:
       post_confirmation: 'This reply will be permanently deleted and cannot be restored. Continue?'
       discussion_confirmation: 'This discussion will be permanently deleted and cannot be restored. Continue?'
       error: 'The content could not be permanently deleted.'
-  admin:
-    permissions:
-      delete_own_forever: 'Permanently delete own content'
