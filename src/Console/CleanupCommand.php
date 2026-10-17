@@ -35,7 +35,7 @@ class CleanupCommand extends AbstractCommand
         }
 
         $days = max(1, (int) $this->settings->get('walsgit-recycle-bin.auto_cleanup_days', 90));
-        $cutoff = now()->subDays($days);
+        $cutoff = \now()->subDays($days);
         $dryRun = (bool) $this->input->getOption('dry-run');
         $discussions = Discussion::query()
             ->whereNotNull('hidden_at')
