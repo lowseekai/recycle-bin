@@ -6,6 +6,7 @@ use Flarum\Console\AbstractCommand;
 use Flarum\Discussion\Discussion;
 use Flarum\Post\Post;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Illuminate\Support\Carbon;
 use Symfony\Component\Console\Input\InputOption;
 
 class CleanupCommand extends AbstractCommand
@@ -35,7 +36,7 @@ class CleanupCommand extends AbstractCommand
         }
 
         $days = max(1, (int) $this->settings->get('walsgit-recycle-bin.auto_cleanup_days', 90));
-        $cutoff = \now()->subDays($days);
+        $cutoff = Carbon::now()->subDays($days);
         $dryRun = (bool) $this->input->getOption('dry-run');
         $discussions = Discussion::query()
             ->whereNotNull('hidden_at')
