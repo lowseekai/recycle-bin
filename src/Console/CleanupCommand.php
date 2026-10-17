@@ -6,15 +6,23 @@ use Flarum\Console\AbstractCommand;
 use Flarum\Discussion\Discussion;
 use Flarum\Post\Post;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 class CleanupCommand extends AbstractCommand
 {
-    protected $signature = 'recycle-bin:cleanup {--dry-run : List eligible content without deleting it} {--force : Run even when automatic cleanup is disabled}';
-
     public function __construct(
         protected SettingsRepositoryInterface $settings
     ) {
         parent::__construct();
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->setName('recycle-bin:cleanup')
+            ->setDescription('Permanently delete eligible soft-deleted content.')
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'List eligible content without deleting it')
+            ->addOption('force', null, InputOption::VALUE_NONE, 'Run even when automatic cleanup is disabled');
     }
 
     protected function fire(): int
